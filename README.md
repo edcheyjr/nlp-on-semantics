@@ -81,21 +81,19 @@ The average accuracy for the model was 60% which means, for every text that is p
 Most of the JOYFUL utterance were being predicted as JEALOUS with 70 values done this.
 Below are results achieved by SGDclassifier model
 
----
+========================================================
 
     Accuracy : |  59.65250965250966%               |
     F1 Score :  | 59.553625217041805%              |
     Recall Score : |  59.65250965250966%           |
     Precision Score : |  59.741581794172774%       |
 
----
+=======================================================
 
 MLP with Word2Vec results.
 Below is the results achieved by MLP model.
 gensim module was used to create word2vec model which was used in representation of text with similarities.
 The model did not have good accuracy,
-
----
 
         Accuracy :   46.46074646074646%
         F1 Score :   46.445182667051874%
