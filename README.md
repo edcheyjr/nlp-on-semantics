@@ -72,44 +72,65 @@ Hint: You may want to extend the existing NLTK stop words list based on some dat
 
 # What do you think might be a shortcoming of the previous representation of utterance features?
 
-If the records contain new words, then size of the matrix would continue to increase which is not efficient.
-There are many zeros in the vector thus resulting in a very sparse matrix which needs to be avoided.
-There is not information on grammer from the sentences or ordering of the words in the text hence the text cannot be reconstructed without loosing information.
-SGDClassifier Results.
-On validation, JOY untterance was the one with lowest prediction score althought it was just less 1% from others.
-The average accuracy for the model was 60% which means, for every text that is predicted, it is 60% accurate that it is in the correct label of utterance.
-Most of the JOYFUL utterance were being predicted as JEALOUS with 70 values done this.
-Below are results achieved by SGDclassifier model
+# Project Name README
 
-========================================================
+## Shortcoming of the Previous Utterance Features Representation
 
-    Accuracy : |  59.65250965250966%               |
-    F1 Score :  | 59.553625217041805%              |
-    Recall Score : |  59.65250965250966%           |
-    Precision Score : |  59.741581794172774%       |
+The previous representation of utterance features had several shortcomings:
 
-=======================================================
+1. **Inefficiency with New Words**: As the records contain new words, the size of the matrix would continuously increase, leading to inefficiency in storage and computation.
 
-MLP with Word2Vec results.
-Below is the results achieved by MLP model.
-gensim module was used to create word2vec model which was used in representation of text with similarities.
-The model did not have good accuracy,
+2. **Sparse Matrix**: The representation resulted in a very sparse matrix due to many zeros in the vector. This sparsity can be problematic and should be avoided.
 
-        Accuracy :   46.46074646074646%
-        F1 Score :   46.445182667051874%
-        Recall Score :   46.46074646074646%
-        Precision Score :   46.64679340139845%
+3. **Lack of Grammar and Word Ordering Information**: The representation did not consider grammar or word ordering in the text, making it impossible to reconstruct the text accurately without losing information.
 
-Explain how you use the BERT output. Specifically, which token(s) output you use?
-Bert is trained using Masked Language Model (MLM) and Next Sentence Prediction task (NSP).
-It recieves input as embedding i.e attention masks and sentences input ids.
-In each word, the first token is a special token called CLS and sentences are separed by also a special token called SEP
-The model's output are embedding for the hidden state. These output are the one to be feeded to layer that can be used for classification.
-In our task, we were only interested on these output (Hidden State) which are associated with initial token CLS since it captures the meaning of the entire senteses more than other hence these hidden state can be used for classification with other models as input.
-After training MLP model with features extracted using BERT model and tokenizers, the results had improved a bit as follows;
-Accuracy : 60.5%
-F1 Score : 60.24614807085745%
-Recall Score : 60.5%
-Precision Score : 60.650467636088266%
+## SGDClassifier Results
 
-#
+The following are the results obtained using the SGDClassifier model on validation data:
+
+- The utterance labeled as JOY had the lowest prediction score, but it was only less than 1% different from the others.
+- The average accuracy of the model was 60%, meaning it correctly predicted the label for 60% of the texts.
+- Most JOYFUL utterances were incorrectly predicted as JEALOUS, with 70 instances of misclassification.
+
+SGDClassifier Results:
+
+| Metric          | Score  |
+| --------------- | ------ |
+| Accuracy        | 46.46% |
+| F1 Score        | 46.45% |
+| Recall Score    | 46.46% |
+| Precision Score | 46.65% |
+
+## MLP with Word2Vec Results
+
+The results obtained using the MLP model with Word2Vec embeddings were not very promising, indicating that the accuracy of the model was not satisfactory.
+
+| Metric          | Score               |
+| --------------- | ------------------- |
+| Accuracy        | 46.46074646074646%  |
+| F1 Score        | 46.445182667051874% |
+| Recall Score    | 46.46074646074646%  |
+| Precision Score | 46.64679340139845%  |
+
+wordvec metrics
+
+The gensim module was used to create the Word2Vec model for representing text with similarities.
+
+## How BERT Output is Used
+
+The BERT model is trained using a Masked Language Model (MLM) and a Next Sentence Prediction task (NSP). It takes embeddings, attention masks, and sentence input IDs as input. Each word is represented with an embedding, and the first token (CLS) represents the entire sentence, while the special token (SEP) is used to separate sentences.
+
+The output of BERT is a hidden state, which contains embeddings for each word. However, for our task, we are primarily interested in the hidden state associated with the initial token (CLS). This token captures the overall meaning of the entire sentence, making it suitable for classification tasks.
+
+After training the MLP model using features extracted from BERT and tokenizers, the results showed some improvement:
+
+### Metrics using MLP with BERT Embeddings
+
+| Metric          | Score  |
+| --------------- | ------ |
+| Accuracy        | 60.5%  |
+| F1 Score        | 60.25% |
+| Recall Score    | 60.5%  |
+| Precision Score | 60.65% |
+
+These results demonstrate that using BERT
